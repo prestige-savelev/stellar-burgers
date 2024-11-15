@@ -24,7 +24,6 @@ export interface UserState {
   success: boolean;
   loading: boolean;
   loadingOrders: boolean;
-
 }
 
 const initialState: UserState = {
@@ -144,7 +143,7 @@ export const userSlice = createSlice({
         state.success = false;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.loading= false;
+        state.loading = false;
         state.success = false;
         console.log(action.error.message);
       })
@@ -176,5 +175,14 @@ export const userSlice = createSlice({
     selectError: (state) => state.error
   }
 });
-export const {selectUser, selectUserLoading, selectOrders, selectSuccess, selectOrdersLoading, selectAuth, selectAuthChecked, selectError} = userSlice.selectors
+export const {
+  selectUser,
+  selectUserLoading,
+  selectOrders,
+  selectSuccess,
+  selectOrdersLoading,
+  selectAuth,
+  selectAuthChecked,
+  selectError
+} = userSlice.selectors;
 export default userSlice.reducer;

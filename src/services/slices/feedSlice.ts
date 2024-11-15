@@ -45,5 +45,6 @@ export const feedSlice = createSlice({
     selectFeed: (state) => state.feed
   }
 });
-export const { selectFeedLoading, selectFeedOrders, selectFeed } = feedSlice.selectors;
+export const { selectFeedLoading, selectFeedOrders, selectFeed } =
+  feedSlice.selectors;
 export default feedSlice.reducer;

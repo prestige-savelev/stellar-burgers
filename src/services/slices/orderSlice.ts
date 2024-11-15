@@ -33,5 +33,5 @@ export const orderSlice = createSlice({
   }
 });
 
-export const {selectorOrderData} = orderSlice.selectors
+export const { selectorOrderData } = orderSlice.selectors;
 export default orderSlice.reducer;

@@ -1,4 +1,4 @@
-import store, { RootState, useSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
 
 import styles from './constructor-page.module.css';
 

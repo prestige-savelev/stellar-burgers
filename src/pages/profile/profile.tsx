@@ -1,6 +1,6 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { RootState, useDispatch, useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import {
   selectSuccess,
   selectUser,
@@ -12,7 +12,7 @@ import { Preloader } from '@ui';
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const user = useSelector(selectUser);
-  const loading = useSelector(selectUserLoading)
+  const loading = useSelector(selectUserLoading);
   const success = useSelector(selectSuccess);
   const dispatch = useDispatch();
 

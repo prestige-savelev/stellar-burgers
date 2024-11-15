@@ -122,7 +122,16 @@ export const constructorSlice = createSlice({
     selectIngredientLoading: (state) => state.isIngredientsLoading
   }
 });
-export const { selectConstructorItems, selectOrderRequest, selectOrderModalData, selectBuns, selectMains, selectSauces, selectIngredients, selectIngredientLoading } = constructorSlice.selectors;
+export const {
+  selectConstructorItems,
+  selectOrderRequest,
+  selectOrderModalData,
+  selectBuns,
+  selectMains,
+  selectSauces,
+  selectIngredients,
+  selectIngredientLoading
+} = constructorSlice.selectors;
 export const { addIngredients, removeIngredients, resetOrder } =
   constructorSlice.actions;
 export default constructorSlice.reducer;
