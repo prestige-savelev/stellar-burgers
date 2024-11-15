@@ -1,20 +1,24 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from 'react-redux';
-import { RootState, useDispatch } from '../../services/store';
+import {  useDispatch, useSelector } from '../../services/store';
 import {
   orderBurger,
-  resetOrder
+  resetOrder,
+  selectConstructorItems,
+  selectOrderModalData,
+  selectOrderRequest
 } from '../../services/slices/constructorSlice';
 import { useNavigate } from 'react-router-dom';
+import { selectAuth } from '../../services/slices/userSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const { constructorItems, orderRequest, orderModalData } = useSelector(
-    (store: RootState) => store.constructorBurger
-  );
-  const { auth } = useSelector((store: RootState) => store.user);
+  const constructorItems = useSelector(selectConstructorItems);
+  const orderRequest = useSelector(selectOrderRequest);
+  const orderModalData = useSelector(selectOrderModalData);
+
+  const auth = useSelector(selectAuth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +35,7 @@ export const BurgerConstructor: FC = () => {
     const ingredientsId = constructorItems.ingredients.map(
       (ingredient) => ingredient._id
     );
-    const ingredients: string[] = [bunsId, ...ingredientsId];
+    const ingredients: string[] = [bunsId, bunsId, ...ingredientsId];
     dispatch(orderBurger(ingredients));
   };
 

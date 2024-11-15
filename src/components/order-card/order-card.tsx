@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { OrderCardProps } from './type';
 import { TIngredient } from '@utils-types';
 import { OrderCardUI } from '../ui/order-card';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
+import { useSelector } from '../../services/store';
+import { selectIngredients } from '../../services/slices/constructorSlice';
 
 const maxIngredients = 6;
 
@@ -13,9 +13,7 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const location = useLocation();
 
   /** TODO: взять переменную из стора */
-  const { ingredients } = useSelector(
-    (store: RootState) => store.constructorBurger
-  );
+  const ingredients = useSelector(selectIngredients)
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;

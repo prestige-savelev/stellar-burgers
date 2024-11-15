@@ -1,15 +1,19 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useSelector } from '../../services/store';
-import { RootState, useDispatch } from '../../services/store';
-import { updateUser } from '../../services/slices/userSlice';
+import { RootState, useDispatch, useSelector } from '../../services/store';
+import {
+  selectSuccess,
+  selectUser,
+  selectUserLoading,
+  updateUser
+} from '../../services/slices/userSlice';
 import { Preloader } from '@ui';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
-  const { user, loading, success } = useSelector(
-    (store: RootState) => store.user
-  );
+  const user = useSelector(selectUser);
+  const loading = useSelector(selectUserLoading)
+  const success = useSelector(selectSuccess);
   const dispatch = useDispatch();
 
   const [formValue, setFormValue] = useState({
@@ -63,12 +67,14 @@ export const Profile: FC = () => {
   }
 
   return (
-    <ProfileUI
-      formValue={formValue}
-      isFormChanged={isFormChanged}
-      handleCancel={handleCancel}
-      handleSubmit={handleSubmit}
-      handleInputChange={handleInputChange}
-    />
+    <>
+      <ProfileUI
+        formValue={formValue}
+        isFormChanged={isFormChanged}
+        handleCancel={handleCancel}
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+      />
+    </>
   );
 };

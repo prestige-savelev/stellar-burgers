@@ -2,14 +2,12 @@ import { FC } from 'react';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/services/store';
+import { useSelector } from '../../services/store';
+import { selectIngredients } from '../../services/slices/constructorSlice';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
-  const { ingredients } = useSelector(
-    (store: RootState) => store.constructorBurger
-  );
+  const ingredients = useSelector(selectIngredients)
 
   const { id } = useParams();
 

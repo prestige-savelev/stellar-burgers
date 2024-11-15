@@ -1,13 +1,13 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
-import { RootState, useDispatch, useSelector } from '../../services/store';
-import { loginUser } from '../../services/slices/userSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { loginUser, selectError } from '../../services/slices/userSlice';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { error } = useSelector((store: RootState) => store.user);
+  const error = useSelector(selectError);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

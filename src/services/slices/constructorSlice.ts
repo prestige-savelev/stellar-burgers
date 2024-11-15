@@ -14,10 +14,6 @@ export interface ConstructorState {
     bun: TConstructorIngredient | null;
     ingredients: TConstructorIngredient[];
   };
-  burgerConstructor: {
-    bun: TConstructorIngredient | null;
-    ingredients: TIngredient[];
-  };
   orderRequest: boolean;
   orderModalData: TOrder | null;
   buns: TIngredient[];
@@ -29,10 +25,6 @@ const initialState: ConstructorState = {
   isIngredientsLoading: false,
   ingredients: [],
   constructorItems: {
-    bun: null,
-    ingredients: []
-  },
-  burgerConstructor: {
     bun: null,
     ingredients: []
   },
@@ -61,10 +53,8 @@ export const constructorSlice = createSlice({
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
         if (action.payload.type === 'bun') {
           state.constructorItems.bun = action.payload;
-          state.burgerConstructor.bun = action.payload;
         } else {
           state.constructorItems.ingredients.push(action.payload);
-          state.burgerConstructor.ingredients.push(action.payload);
         }
       },
       prepare: (ingredient: TIngredient) => {
@@ -72,12 +62,11 @@ export const constructorSlice = createSlice({
         return { payload: { ...ingredient, id } };
       }
     },
-    removeIngredients: (state, action: PayloadAction<TConstructorIngredient>) => {
+    removeIngredients: (
+      state,
+      action: PayloadAction<TConstructorIngredient>
+    ) => {
       state.constructorItems.ingredients =
-        state.constructorItems.ingredients.filter(
-          (i) => i.id !== action.payload.id
-        );
-      state.burgerConstructor.ingredients =
         state.constructorItems.ingredients.filter(
           (i) => i.id !== action.payload.id
         );
@@ -105,28 +94,35 @@ export const constructorSlice = createSlice({
       })
       .addCase(orderBurger.pending, (state) => {
         state.isIngredientsLoading = true;
-        state.orderRequest = false;
+        state.orderRequest = true;
       })
       .addCase(orderBurger.rejected, (state, action) => {
-        state.isIngredientsLoading = true;
-        state.orderRequest = false;
+        state.isIngredientsLoading = false;
+        state.orderRequest = true;
         console.log(action.error.message as string);
       })
       .addCase(orderBurger.fulfilled, (state, action) => {
         state.isIngredientsLoading = false;
-        state.orderRequest = true;
+        state.orderRequest = false;
         state.orderModalData = action.payload.order;
         state.constructorItems = {
           bun: null,
           ingredients: []
         };
-        state.burgerConstructor = {
-          bun: null,
-          ingredients: []
-        };
       });
+  },
+  selectors: {
+    selectConstructorItems: (state) => state.constructorItems,
+    selectOrderRequest: (state) => state.orderRequest,
+    selectOrderModalData: (state) => state.orderModalData,
+    selectBuns: (state) => state.buns,
+    selectMains: (state) => state.mains,
+    selectSauces: (state) => state.sauces,
+    selectIngredients: (state) => state.ingredients,
+    selectIngredientLoading: (state) => state.isIngredientsLoading
   }
 });
-
-export const { addIngredients, removeIngredients, resetOrder } = constructorSlice.actions;
+export const { selectConstructorItems, selectOrderRequest, selectOrderModalData, selectBuns, selectMains, selectSauces, selectIngredients, selectIngredientLoading } = constructorSlice.selectors;
+export const { addIngredients, removeIngredients, resetOrder } =
+  constructorSlice.actions;
 export default constructorSlice.reducer;

@@ -3,12 +3,12 @@ import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
 
 import { useDispatch, useSelector } from '../../services/store';
-import { getFeed } from '../../services/slices/feedSlice';
-import { RootState } from '../../services/store';
+import { getFeed, selectFeedOrders } from '../../services/slices/feedSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
-  const { orders } = useSelector((store: RootState) => store.feedBurger);
+  const orders = useSelector(selectFeedOrders);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

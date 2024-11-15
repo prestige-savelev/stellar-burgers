@@ -1,4 +1,4 @@
-import { getOrderByNumberApi} from '@api';
+import { getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
@@ -27,7 +27,11 @@ export const orderSlice = createSlice({
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.orderData = action.payload.orders[0];
       });
+  },
+  selectors: {
+    selectorOrderData: (state) => state.orderData
   }
 });
 
+export const {selectorOrderData} = orderSlice.selectors
 export default orderSlice.reducer;

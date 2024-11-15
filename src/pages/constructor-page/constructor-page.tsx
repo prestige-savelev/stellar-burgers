@@ -1,7 +1,4 @@
-import store, {
-  RootState,
-  useSelector
-} from '../../services/store';
+import store, { RootState, useSelector } from '../../services/store';
 
 import styles from './constructor-page.module.css';
 
@@ -9,12 +6,11 @@ import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
+import { selectIngredientLoading } from '../../services/slices/constructorSlice';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
-  const { isIngredientsLoading } = useSelector(
-    (store: RootState) => store.constructorBurger
-  );
+  const isIngredientsLoading = useSelector(selectIngredientLoading);
 
   return (
     <>

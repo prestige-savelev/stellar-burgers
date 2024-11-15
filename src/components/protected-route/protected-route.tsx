@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { RootState, useSelector } from '../../services/store';
 import { Preloader } from '@ui';
+import { selectAuth, selectAuthChecked } from '../../services/slices/userSlice';
 
 type ProtectedRouteProps = {
   children: React.ReactElement;
@@ -11,10 +12,8 @@ export const ProtectedRoute = ({
   children,
   onlyUnAuth
 }: ProtectedRouteProps) => {
-  const { auth } = useSelector((store: RootState) => store.user);
-  const { isAuthChecked } = useSelector(
-    (store: RootState) => store.user
-  );
+  const auth = useSelector(selectAuth)
+  const isAuthChecked = useSelector(selectAuthChecked)
   const location = useLocation();
 
   if (!isAuthChecked) {

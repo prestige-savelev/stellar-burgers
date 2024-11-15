@@ -39,10 +39,22 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:id' element={<OrderInfo />} />
+        <Route
+          path='/feed/:id'
+          element={
+            <div>
+              <p
+                className={`text text_type_main-medium ${styles.detailHeader}`}
+              >
+                {`#${location.pathname.match(/\d+/)}`}
+              </p>
+              <OrderInfo />
+            </div>
+          }
+        />
         <Route
           path='/login'
           element={
@@ -75,7 +87,19 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <div>
+              <p
+                className={`text text_type_main-medium ${styles.detailHeader}`}
+              >
+                Детали ингредиента
+              </p>
+              <IngredientDetails />
+            </div>
+          }
+        />
         <Route path='/profile'>
           <Route
             index
@@ -97,7 +121,14 @@ const App = () => {
             path='orders/:id'
             element={
               <ProtectedRoute>
-                <OrderInfo />
+                <div>
+                  <p
+                    className={`text text_type_main-medium ${styles.detailHeader}`}
+                  >
+                    {`#${location.pathname.match(/\d+/)}`}
+                  </p>
+                  <OrderInfo />
+                </div>
               </ProtectedRoute>
             }
           />
@@ -125,7 +156,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Modal
-                  title={`${location.pathname.match(/\d+/)}`}
+                  title={`#${location.pathname.match(/\d+/)}`}
                   onClose={() => {
                     navigate(-1);
                   }}
@@ -140,7 +171,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Modal
-                  title={`${location.pathname.match(/\d+/)}`}
+                  title={`#${location.pathname.match(/\d+/)}`}
                   onClose={() => {
                     navigate(-1);
                   }}

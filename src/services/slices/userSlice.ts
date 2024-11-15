@@ -23,6 +23,8 @@ export interface UserState {
   isAuthChecked: boolean;
   success: boolean;
   loading: boolean;
+  loadingOrders: boolean;
+
 }
 
 const initialState: UserState = {
@@ -35,7 +37,8 @@ const initialState: UserState = {
   orders: [],
   isAuthChecked: false,
   success: false,
-  loading: false
+  loading: false,
+  loadingOrders: false
 };
 
 export const registerUser = createAsyncThunk(
@@ -112,16 +115,13 @@ export const userSlice = createSlice({
       })
       .addCase(logout.pending, (state) => {
         state.auth = true;
-        state.loading = true;
       })
       .addCase(logout.rejected, (state, action) => {
         console.log(action.error.message);
         state.auth = true;
-        state.loading = false;
       })
       .addCase(logout.fulfilled, (state) => {
         state.auth = false;
-        state.loading = false;
         state.user.name = '';
         state.user.email = '';
       })
@@ -138,14 +138,13 @@ export const userSlice = createSlice({
         state.user = action.payload.user;
         state.auth = true;
         state.isAuthChecked = true;
-        state.success = true;
       })
       .addCase(updateUser.pending, (state, action) => {
         state.loading = true;
         state.success = false;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.loading = false;
+        state.loading= false;
         state.success = false;
         console.log(action.error.message);
       })
@@ -154,18 +153,28 @@ export const userSlice = createSlice({
         state.success = true;
         state.user = action.payload.user;
       })
-      .addCase(getOrders.pending, (state, action) => {
-        state.loading = true;
+      .addCase(getOrders.pending, (state) => {
+        state.loadingOrders = true;
       })
       .addCase(getOrders.rejected, (state, action) => {
-        state.loading = false;
+        state.loadingOrders = false;
         console.log(action.error.message);
       })
       .addCase(getOrders.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingOrders = false;
         state.orders = action.payload;
       });
+  },
+  selectors: {
+    selectUser: (state) => state.user,
+    selectUserLoading: (state) => state.loading,
+    selectOrdersLoading: (state) => state.loadingOrders,
+    selectOrders: (state) => state.orders,
+    selectSuccess: (state) => state.success,
+    selectAuth: (state) => state.auth,
+    selectAuthChecked: (state) => state.isAuthChecked,
+    selectError: (state) => state.error
   }
 });
-
+export const {selectUser, selectUserLoading, selectOrders, selectSuccess, selectOrdersLoading, selectAuth, selectAuthChecked, selectError} = userSlice.selectors
 export default userSlice.reducer;
