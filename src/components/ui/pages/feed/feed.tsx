@@ -6,7 +6,7 @@ import { FeedUIProps } from './type';
 import { OrdersList, FeedInfo } from '@components';
 import { RefreshButton } from '@zlden/react-developer-burger-ui-components';
 import { useSelector } from '../../../../services/store';
-import { selectFeedLoading } from '../../../../services/slices/feedSlice';
+import { selectFeedLoading } from '../../../../services/slices/feedSlice/feedSlice';
 
 export const FeedUI: FC<FeedUIProps> = memo(({ orders, handleGetFeeds }) => {
   const loading = useSelector(selectFeedLoading);

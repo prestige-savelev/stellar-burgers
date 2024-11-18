@@ -21,9 +21,9 @@ import {
   ProtectedRoute
 } from '@components';
 import { useDispatch } from '../../services/store';
-import { getIngredients } from '../../services/slices/constructorSlice';
+import { getIngredients } from '../../services/slices/constructorSlice/constructorSlice';
 import { useEffect } from 'react';
-import { getUser } from '../../services/slices/userSlice';
+import { getUser } from '../../services/slices/userSlice/userSlice';
 
 const App = () => {
   const location = useLocation();
