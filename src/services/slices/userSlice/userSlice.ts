@@ -52,6 +52,8 @@ export const loginUser = createAsyncThunk(
     if (data.success) {
       setCookie('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
+      console.log(data.accessToken);
+      console.log(data.refreshToken);
     }
     return data;
   }

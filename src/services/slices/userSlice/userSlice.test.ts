@@ -23,7 +23,7 @@ describe('test reducers userSlice', () => {
     loading: false,
     loadingOrders: false
   };
-  
+
   describe('test registerUser', () => {
     const actions = {
       pending: {
