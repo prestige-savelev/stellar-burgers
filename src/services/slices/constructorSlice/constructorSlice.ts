@@ -102,7 +102,6 @@ export const constructorSlice = createSlice({
         console.log(action.error.message as string);
       })
       .addCase(orderBurger.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isIngredientsLoading = false;
         state.orderRequest = false;
         state.orderModalData = action.payload.order;

@@ -58,7 +58,6 @@ describe('Test reducers constructorSlice', () => {
         initialState,
         removeIngredients({ id: 'generate', ...ingredientData })
       );
-
       expect(testState).toEqual({
         ...initialState,
         constructorItems: {
