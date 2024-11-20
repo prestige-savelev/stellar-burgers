@@ -2,6 +2,7 @@ import { describe, test, expect } from '@jest/globals';
 import userSlice, {
   getOrders,
   getUser,
+  initialState,
   loginUser,
   logout,
   registerUser,
@@ -10,20 +11,6 @@ import userSlice, {
 import { getUserData, loginUserData, orderData } from '../testData';
 
 describe('test reducers userSlice', () => {
-  const initialState = {
-    user: {
-      name: '',
-      email: ''
-    },
-    error: null,
-    auth: false,
-    orders: [],
-    isAuthChecked: false,
-    success: false,
-    loading: false,
-    loadingOrders: false
-  };
-
   describe('test registerUser', () => {
     const actions = {
       pending: {

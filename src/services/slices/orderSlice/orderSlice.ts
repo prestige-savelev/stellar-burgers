@@ -6,7 +6,7 @@ export interface OrderState {
   orderData: TOrder | null;
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   orderData: null
 };
 

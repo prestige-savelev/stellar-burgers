@@ -26,7 +26,7 @@ export interface UserState {
   loadingOrders: boolean;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   user: {
     name: '',
     email: ''

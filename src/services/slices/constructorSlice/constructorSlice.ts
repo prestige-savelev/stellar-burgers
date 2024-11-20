@@ -21,7 +21,7 @@ export interface ConstructorState {
   sauces: TIngredient[];
 }
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   isIngredientsLoading: false,
   ingredients: [],
   constructorItems: {

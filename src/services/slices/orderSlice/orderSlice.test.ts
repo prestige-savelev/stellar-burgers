@@ -1,12 +1,8 @@
 import { describe, test, expect } from '@jest/globals';
-import orderSlice, { getOrderByNumber } from './orderSlice';
+import orderSlice, { getOrderByNumber, initialState } from './orderSlice';
 import { numberOrderData } from '../testData';
 
 describe('test reducers orderSlice', () => {
-  const initialState = {
-    orderData: null
-  };
-
   describe('test getOrderByNumber', () => {
     const actions = {
       fulfilled: {

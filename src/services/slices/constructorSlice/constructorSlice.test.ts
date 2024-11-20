@@ -2,6 +2,7 @@ import { describe, test, expect } from '@jest/globals';
 import constructorSlice, {
   addIngredients,
   getIngredients,
+  initialState,
   orderBurger,
   removeIngredients,
   resetOrder
@@ -9,24 +10,10 @@ import constructorSlice, {
 import { bunData, ingredientData, orderData } from '../testData';
 
 describe('Test reducers constructorSlice', () => {
-  const initialStates = {
-    isIngredientsLoading: false,
-    ingredients: [],
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    },
-    orderRequest: false,
-    orderModalData: null,
-    buns: [],
-    mains: [],
-    sauces: []
-  };
-
   describe('test addIngredients', () => {
     test('test addIngredients on bun', () => {
       const testState = constructorSlice(
-        initialStates,
+        initialState,
         addIngredients(bunData)
       );
       expect(testState.constructorItems.bun).toEqual({
@@ -36,7 +23,7 @@ describe('Test reducers constructorSlice', () => {
     }),
       test('test addIngredients on ingredients', () => {
         const testState = constructorSlice(
-          initialStates,
+          initialState,
           addIngredients(ingredientData)
         );
         expect(testState.constructorItems.ingredients[0]).toEqual({
@@ -46,20 +33,20 @@ describe('Test reducers constructorSlice', () => {
       });
   });
   describe('test removeIngredients', () => {
-    const initialState = {
-      ...initialStates,
+    const initialStates = {
+      ...initialState,
       constructorItems: {
-        ...initialStates.constructorItems,
+        ...initialState.constructorItems,
         ingredients: [{ id: 'generate', ...ingredientData }]
       }
     };
     test('test removeIngredients on delete', () => {
       const testState = constructorSlice(
-        initialState,
+        initialStates,
         removeIngredients({ id: 'generate', ...ingredientData })
       );
       expect(testState).toEqual({
-        ...initialState,
+        ...initialStates,
         constructorItems: {
           bun: null,
           ingredients: []
@@ -68,15 +55,15 @@ describe('Test reducers constructorSlice', () => {
     });
   });
   describe('test resetOrder', () => {
-    const initialState = {
-      ...initialStates,
+    const initialStates = {
+      ...initialState,
       orderRequest: true,
       orderModalData: orderData
     };
     test('test resetOrder on reset', () => {
-      const testState = constructorSlice(initialState, resetOrder());
+      const testState = constructorSlice(initialStates, resetOrder());
       expect(testState).toEqual({
-        ...initialState,
+        ...initialStates,
         orderRequest: false,
         orderModalData: null
       });
@@ -98,15 +85,15 @@ describe('Test reducers constructorSlice', () => {
       }
     };
     test('test getIngredients.pending', () => {
-      const state = constructorSlice(initialStates, actions.pending);
+      const state = constructorSlice(initialState, actions.pending);
       expect(state.isIngredientsLoading).toBe(true);
     });
     test('test getIngredients.rejected', () => {
-      const state = constructorSlice(initialStates, actions.rejected);
+      const state = constructorSlice(initialState, actions.rejected);
       expect(state.isIngredientsLoading).toBe(false);
     });
     test('test getIngredients.fulfilled', () => {
-      const state = constructorSlice(initialStates, actions.fulfilled);
+      const state = constructorSlice(initialState, actions.fulfilled);
       expect(state.isIngredientsLoading).toBe(false);
       expect(state.ingredients).toBe(actions.fulfilled.payload);
       expect(state.buns).toEqual(
@@ -136,17 +123,17 @@ describe('Test reducers constructorSlice', () => {
       }
     };
     test('test orderBurger.pending', () => {
-      const state = constructorSlice(initialStates, actions.pending);
+      const state = constructorSlice(initialState, actions.pending);
       expect(state.isIngredientsLoading).toBe(true);
       expect(state.orderRequest).toBe(true);
     });
     test('test orderBurger.rejected', () => {
-      const state = constructorSlice(initialStates, actions.rejected);
+      const state = constructorSlice(initialState, actions.rejected);
       expect(state.isIngredientsLoading).toBe(false);
       expect(state.orderRequest).toBe(true);
     });
     test('test orderBurger.fulfilled', () => {
-      const state = constructorSlice(initialStates, actions.fulfilled);
+      const state = constructorSlice(initialState, actions.fulfilled);
       expect(state.isIngredientsLoading).toBe(false);
       expect(state.orderRequest).toBe(false);
       expect(state.orderModalData).toBe(actions.fulfilled.payload.order);

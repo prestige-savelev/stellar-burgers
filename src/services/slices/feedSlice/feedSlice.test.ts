@@ -1,17 +1,8 @@
 import { describe, test, expect } from '@jest/globals';
-import feedSlice, { getFeed } from './feedSlice';
+import feedSlice, { getFeed, initialState } from './feedSlice';
 import { feedData } from '../testData';
 
 describe('test reducers feedSlice', () => {
-  const initialState = {
-    orders: [],
-    feed: {
-      total: 0,
-      totalToday: 0
-    },
-    loading: false
-  };
-
   describe('test getFeed', () => {
     const actions = {
       pending: {

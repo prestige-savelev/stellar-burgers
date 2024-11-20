@@ -5,10 +5,11 @@ const BUNS = '[data-cy="Краторная булка N-200i"]';
 const MAINS = '[data-cy="Биокотлета из марсианской Магнолии"]';
 const CONSTRUCTOR = '[data-cy="burger-constructor"]';
 const MODAL = '[data-cy="modal"]';
+const testUrl = 'http://localhost:4000/'
 
 describe('test constructorBurger', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:4000/');
+        cy.visit(testUrl);
         cy.intercept('GET', `${BURGER_API_URL}/ingredients`, {
             fixture: 'ingredients.json'
         })
