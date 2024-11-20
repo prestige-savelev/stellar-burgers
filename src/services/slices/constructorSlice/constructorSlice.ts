@@ -4,7 +4,7 @@ import {
   nanoid,
   PayloadAction
 } from '@reduxjs/toolkit';
-import { getIngredientsApi, orderBurgerApi } from '@api';
+import { getIngredientsApi, orderBurgerApi } from '../../../utils/burger-api';
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 
 export interface ConstructorState {
@@ -21,7 +21,7 @@ export interface ConstructorState {
   sauces: TIngredient[];
 }
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   isIngredientsLoading: false,
   ingredients: [],
   constructorItems: {

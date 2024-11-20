@@ -6,12 +6,12 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
-import constructorBurger from './slices/constructorSlice';
-import orderBurger from './slices/orderSlice';
-import feedBurger from './slices/feedSlice';
-import user from './slices/userSlice';
+import constructorBurger from './slices/constructorSlice/constructorSlice';
+import orderBurger from './slices/orderSlice/orderSlice';
+import feedBurger from './slices/feedSlice/feedSlice';
+import user from './slices/userSlice/userSlice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   constructorBurger,
   orderBurger,
   feedBurger,

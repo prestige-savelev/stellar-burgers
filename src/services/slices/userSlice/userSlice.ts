@@ -7,10 +7,10 @@ import {
   TLoginData,
   TRegisterData,
   updateUserApi
-} from '@api';
+} from '../../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { deleteCookie, setCookie } from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../../utils/cookie';
 
 export interface UserState {
   user: {
@@ -26,7 +26,7 @@ export interface UserState {
   loadingOrders: boolean;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   user: {
     name: '',
     email: ''

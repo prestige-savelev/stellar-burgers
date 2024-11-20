@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 import {
   getOrderByNumber,
   selectorOrderData
-} from '../../services/slices/orderSlice';
-import { selectIngredients } from '../../services/slices/constructorSlice';
+} from '../../services/slices/orderSlice/orderSlice';
+import { selectIngredients } from '../../services/slices/constructorSlice/constructorSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */

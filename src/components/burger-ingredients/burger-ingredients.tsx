@@ -8,7 +8,7 @@ import {
   selectBuns,
   selectMains,
   selectSauces
-} from '../../services/slices/constructorSlice';
+} from '../../services/slices/constructorSlice/constructorSlice';
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
